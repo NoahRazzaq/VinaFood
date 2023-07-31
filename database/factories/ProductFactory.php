@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Product;
+use App\Models\Restaurant;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,6 +11,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class ProductFactory extends Factory
 {
+    protected $model = Product::class;
+
     /**
      * Define the model's default state.
      *
@@ -16,11 +20,13 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
+        $resto = Restaurant::all()->random();
+
         return [
             'name' => $this->faker->word(),
             'detail' => $this -> faker->text(),
             'price' => round(rand(5, 30), 2),
-
+            'restaurant_id' => $resto->id
         ];
     }
 }
