@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RestaurantController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,13 +30,33 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/products', [ProductController::class, 'index'])->name('product.index');
-Route::get('/products/create', [ProductController::class, 'create'])->name('product.create');
-Route::post('/products/store', [ProductController::class, 'store'])->name('product.store');
-Route::get('/products/{id}', [ProductController::class, 'show'])->name('product.show');
-Route::get('/products/deleteProduct/{product}',[ProductController::class, 'delete'])->name('product.delete');
-Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('product.edit');
-Route::put('/products/{product}/edit', [ProductController::class, 'update'])->name('product.update');
+Route::controller(ProductController::class)->group(function () {
+    Route::prefix('/products')->group(function () {
+
+        Route::get('/', 'index')->name('product.index');
+        Route::get('/create', 'create')->name('product.create');
+        Route::post('/store', 'store')->name('product.store');
+        Route::get('/{id}', 'show')->name('product.show');
+        Route::get('/deleteProduct/{product}', 'delete')->name('product.delete');
+        Route::get('/{id}/edit', 'edit')->name('product.edit');
+        Route::put('/{product}/edit', 'update')->name('product.update');
+
+    });
+});
+
+Route::controller(RestaurantController::class)->group(function () {
+    Route::prefix('/restaurants')->group(function () {
+        Route::get('/', 'index')->name('restaurant.index');
+        Route::get('/create', 'create')->name('restaurant.create');
+        Route::post('/store', 'store')->name('restaurant.store');
+        Route::get('/{id}', 'show')->name('restaurant.show');
+        Route::get('/deleteRestaurant/{restaurant}', 'delete')->name('restaurant.delete');
+        Route::get('/{id}/edit', 'edit')->name('restaurant.edit');
+        Route::put('/{restaurant}/edit', 'update')->name('restaurant.update');
+
+    });
+});
+
 
 
 

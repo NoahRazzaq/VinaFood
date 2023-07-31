@@ -14,7 +14,7 @@ class Product extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'name','detail','price','image'
+        'name','detail','price','image','restaurant_id'
     ];
 
 

@@ -8,7 +8,17 @@
 </head>
 <body>
     <div>
-        {{$product->name}}
+        <div>
+            {{$product->price}}
+        </div>
+        <div>{{$product->detail}}
+</div>
+        <div>{{$product->name}}
+</div>
+    </div>
+
+    <div>
+        {{$product->restaurant->name}}
     </div>
 
     <a class="" href="/products/deleteProduct/{{$product->id}}">Supprimer</a>

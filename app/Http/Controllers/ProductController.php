@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Restaurant;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -24,7 +25,10 @@ class ProductController extends Controller
 
     public function create ()
     {
-        return view("product/form");
+        $restaurants = Restaurant::all();
+        return view("product/form", [
+            'restaurants' => $restaurants
+        ]);
     }
 
 
@@ -33,10 +37,10 @@ class ProductController extends Controller
     {
         $validated = $request->validate(
             [
-
                 'name' => 'required|max:255',
                 'detail' => 'required|max:255',
                 'price' => 'required|numeric',
+                'restaurant' => 'required'
             ],
 
             [
@@ -51,6 +55,7 @@ class ProductController extends Controller
             'name' => $validated['name'],
             'detail' => $validated['detail'],
             'price' => $validated['price'],
+            'restaurant_id' => $validated['restaurant']
         ]);
 
 
@@ -67,8 +72,11 @@ class ProductController extends Controller
     public function edit ($idProduct)
     {
         $product = Product::findOrFail($idProduct);
+        $restaurants = Restaurant::all();
+
         return view("product/edit", [
-            'product' => $product
+            'product' => $product,
+            'restaurants' => $restaurants
         ]);
     }
 
@@ -77,10 +85,10 @@ class ProductController extends Controller
     {
         $validated = $request->validate(
             [
-
                 'name' => 'required|max:255',
                 'detail' => 'required|max:255',
                 'price' => 'required|numeric',
+                'restaurant' => 'required'
             ],
 
             [
@@ -89,9 +97,8 @@ class ProductController extends Controller
                 'price.numeric' => 'Le format du prix est invalide'
             ]
         );
-
+        $product->restaurant_id = $request->restaurant;
         $product->update($validated);
-
 
         return redirect("/products");
     }
