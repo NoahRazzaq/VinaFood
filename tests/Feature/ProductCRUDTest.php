@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\Restaurant;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -15,13 +16,16 @@ class ProductCRUDTest extends TestCase
     public function test_create_product()
     {
         $restaurant = Restaurant::factory()->create();
+        $category = Category::factory()->create();
 
         $response = $this->post('/products/store', [
             'name' => 'Toto',
             'detail' => 'tata',
             'price' => 10.99,
             'restaurant' => $restaurant->id,
+            'category' => $category->id
         ]);
+
 
         $response->assertRedirect('/products');
     }
@@ -29,12 +33,14 @@ class ProductCRUDTest extends TestCase
     public function test_error_create_product()
     {
         $restaurant = Restaurant::factory()->create();
+        $category = Category::factory()->create();
 
         $response = $this->post('/products/store', [
             'name' => 'New Product',
             'detail' => 'Product details',
             'price' => 'ee',
             'restaurant' => $restaurant->id,
+            'category' => $category->id
         ]);
     
         $response->assertRedirect();
@@ -60,12 +66,14 @@ class ProductCRUDTest extends TestCase
     {
         $product = Product::factory()->create();
         $restaurant = Restaurant::factory()->create();
+        $category = Category::factory()->create();
 
         $response = $this->put("/products/{$product->id}/edit", [
             'name' => 'Toto tata',
             'detail' => 'ttotototo',
             'price' => 5,
             'restaurant' => $restaurant->id,
+            'category' => $category->id
         ]);
 
         $response->assertRedirect('/products');
