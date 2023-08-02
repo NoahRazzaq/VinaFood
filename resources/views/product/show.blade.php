@@ -7,19 +7,27 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>{{$product->name}}</h1>
     <div>
         <div>
             {{$product->price}}
         </div>
         <div>{{$product->detail}}
 </div>
-        <div>{{$product->name}}
-</div>
+       
+    </div>
+
+    <div>
+        <img src="{{$product->image}}" alt="">
     </div>
 
     <div>
         {{$product->restaurant->name}}
     </div>
+    @if ($product->category != null)
+       category : {{$product->category->name}}
+    @endif
+   
 
     <a class="" href="/products/deleteProduct/{{$product->id}}">Supprimer</a>
     <a class="" href="/products/{{$product->id}}/edit">Modifier</a>

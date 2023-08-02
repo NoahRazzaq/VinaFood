@@ -18,10 +18,12 @@ return new class extends Migration
             $table->double('price',4,2);
             $table->string('image')->nullable();
             $table->unsignedBigInteger('restaurant_id');
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->timestamps();
 
 
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
 
         });
     }

@@ -32,8 +32,6 @@ class RestaurantController extends Controller
 
     public function store (Request $request)
     {
-
-
         $validated = $request->validate(
 
             [
@@ -54,7 +52,6 @@ class RestaurantController extends Controller
             ]
             );
 
-
             $restaurant = Restaurant::create([
                 'name' => $validated['name'],
                 'phone' => $validated['phone'],
@@ -63,9 +60,7 @@ class RestaurantController extends Controller
                 'cp' => $validated['cp'],
             ]);
 
-
             return redirect('/restaurants');
-
     }
 
     public function delete(Restaurant $restaurant)

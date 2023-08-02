@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RestaurantController;
@@ -57,6 +58,15 @@ Route::controller(RestaurantController::class)->group(function () {
     });
 });
 
+Route::controller(CategoryController::class)->group(function () {
+    Route::prefix('/categories')->group(function () {
+        Route::get('/', 'index')->name('category.index');
+        Route::get('/create', 'create')->name('category.create');
+        Route::post('/store', 'store')->name('category.store');
+        Route::get('/{id}', 'show')->name('category.show');
+        Route::get('/deleteCategory/{category}', 'delete')->name('category.delete');
+    });
+});
 
 
 

@@ -7,13 +7,13 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Les produits</h1>
-    @foreach ($products as $product)
-<div>
-    <a href="{{ route('product.show', ['id' => $product->id]) }}">
-        {{$product->name}}
-    </a>
-</div>
+    @foreach ($categories as $category)
+
+    <div>
+        <a href="{{ route('category.show', ['id' => $category->id]) }}">
+            {{$category->name}}
+        </a>
+    </div>
         
     @endforeach
 </body>

@@ -49,6 +49,22 @@
                     @endforeach
                 </select>
             </div>
+
+            <div class="mb-6">
+              <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Catégorie</label>
+              <select name="category" class="form-select">
+                  <option selected disabled value=""></option>
+                  <option value="">---Séléctionnez une catégorie---</option>
+                  @foreach($categories as $category)
+                  <option value="{{$category->id}}"
+                    @if(old('category') == $category->id || $product->category_id == $category->id) 
+                                selected 
+                            @endif
+                    >
+                    {{$category->name}}</option>
+                  @endforeach
+              </select>
+          </div>
             
             
 

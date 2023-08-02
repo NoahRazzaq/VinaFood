@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
@@ -26,8 +27,11 @@ class ProductController extends Controller
     public function create ()
     {
         $restaurants = Restaurant::all();
+        $categories = Category::all();
+
         return view("product/form", [
-            'restaurants' => $restaurants
+            'restaurants' => $restaurants,
+            'categories' => $categories
         ]);
     }
 
@@ -40,7 +44,7 @@ class ProductController extends Controller
                 'name' => 'required|max:255',
                 'detail' => 'required|max:255',
                 'price' => 'required|numeric',
-                'restaurant' => 'required'
+                'restaurant' => 'required'    
             ],
 
             [
@@ -55,7 +59,8 @@ class ProductController extends Controller
             'name' => $validated['name'],
             'detail' => $validated['detail'],
             'price' => $validated['price'],
-            'restaurant_id' => $validated['restaurant']
+            'restaurant_id' => $validated['restaurant'],
+            'category_id' => $request->input('category'),
         ]);
 
 
@@ -73,10 +78,12 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($idProduct);
         $restaurants = Restaurant::all();
+        $categories = Category::all();
 
         return view("product/edit", [
             'product' => $product,
-            'restaurants' => $restaurants
+            'restaurants' => $restaurants,
+            'categories' => $categories
         ]);
     }
 
@@ -98,6 +105,8 @@ class ProductController extends Controller
             ]
         );
         $product->restaurant_id = $request->restaurant;
+        $product->category_id = $request->category;
+
         $product->update($validated);
 
         return redirect("/products");
