@@ -7,6 +7,7 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>Les produits</h1>
     @foreach ($products as $product)
 <div>
     <a href="{{ route('product.show', ['id' => $product->id]) }}">

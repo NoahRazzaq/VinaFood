@@ -26,6 +26,7 @@ class RestaurantFactory extends Factory
             'phone' => $faker->phoneNumber(),
             'address' => $faker->address(),
             'cp' => str_replace(' ', '', $faker->postcode()),
+            'image' => $this->faker->image(null, 360, 360, 'animals', true, true, 'cats', true, 'jpg'),
             'city' => $faker->city(),
         ];
     }

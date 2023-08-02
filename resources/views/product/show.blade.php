@@ -7,14 +7,18 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>{{$product->name}}</h1>
     <div>
         <div>
             {{$product->price}}
         </div>
         <div>{{$product->detail}}
 </div>
-        <div>{{$product->name}}
-</div>
+       
+    </div>
+
+    <div>
+        <img src="{{$product->image}}" alt="">
     </div>
 
     <div>
