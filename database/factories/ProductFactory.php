@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\Restaurant;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -25,7 +26,8 @@ class ProductFactory extends Factory
             'detail' => $this -> faker->text(),
             'price' => round(rand(5, 30), 2),
             'image' => $this->faker->image(null, 360, 360, 'animals', true, true, 'cats', true, 'jpg'),
-            'restaurant_id' => Restaurant::factory()
+            'restaurant_id' => Restaurant::factory(),
+            'category_id' => Category::factory()
         ];
     }
 }
