@@ -24,6 +24,10 @@
     <div>
         {{$product->restaurant->name}}
     </div>
+    @if ($product->category != null)
+       category : {{$product->category->name}}
+    @endif
+   
 
     <a class="" href="/products/deleteProduct/{{$product->id}}">Supprimer</a>
     <a class="" href="/products/{{$product->id}}/edit">Modifier</a>

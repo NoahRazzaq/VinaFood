@@ -14,6 +14,7 @@
 
     <img src="$restaurant->image}}" alt="">
 
+
     <a class="" href="/restaurants/deleteRestaurant/{{$restaurant->id}}">Supprimer</a>
     <a class="" href="/restaurants/{{$restaurant->id}}/edit">Modifier</a>
 
