@@ -13,7 +13,7 @@ class AvailableDaySeeder extends Seeder
      */
     public function run(): void
     {
-        $daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        $daysOfWeek = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
 
         foreach ($daysOfWeek as $day) {
             AvailableDay::create([

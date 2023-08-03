@@ -22,7 +22,7 @@ class RestaurantFactory extends Factory
         $faker = \Faker\Factory::create('fr_FR');
 
         return [
-            'name' => $faker->unique->word(),
+            'name' => $faker->unique->company(),
             'phone' => $faker->phoneNumber(),
             'address' => $faker->address(),
             'cp' => str_replace(' ', '', $faker->postcode()),
