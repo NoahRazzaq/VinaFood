@@ -30,4 +30,10 @@ class Restaurant extends Model
     }
 
 
+    public function availableDays()
+    {
+        return $this->belongsToMany(AvailableDay::class, 'restaurant_available_day', 'restaurant_id', 'available_day_id');
+    }
+
+
 }
