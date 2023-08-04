@@ -50,7 +50,11 @@ class ProductController extends Controller
             [
                 'name.max' => 'Le nom du produit doit contenir 255 caractères maximum',
                 'detail.max' => 'Le détail doit contenir 255 caractères maximum',
-                'price.numeric' => 'Le format du prix est invalide'
+                'price.numeric' => 'Le format du prix est invalide',
+
+                'name.required' => 'Renseignez ici le nom du produit',
+                'detail.required' => 'Renseignez ici la description du produit',
+                'price.required' => 'Renseignez ici le prix du produit',
             ]
         );
 
@@ -101,7 +105,12 @@ class ProductController extends Controller
             [
                 'name.max' => 'Le nom du produit doit contenir 255 caractères maximum',
                 'detail.max' => 'Le détail doit contenir 255 caractères maximum',
-                'price.numeric' => 'Le format du prix est invalide'
+                'price.numeric' => 'Le format du prix est invalide',
+
+                'name.required' => 'Renseignez ici le nom du produit',
+                'detail.required' => 'Renseignez ici la description du produit',
+                'price.required' => 'Renseignez ici le prix du produit',
+
             ]
         );
         $product->restaurant_id = $request->restaurant;

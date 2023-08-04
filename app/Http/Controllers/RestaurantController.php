@@ -19,7 +19,7 @@ class RestaurantController extends Controller
 
     public function show($idRestaurant)
     {
-        $restaurant = Restaurant::findOrFail($idRestaurant);
+        $restaurant = Restaurant::with('products')->findOrFail($idRestaurant);
 
         return view('restaurant/show', [
             'restaurant' => $restaurant
@@ -48,11 +48,18 @@ class RestaurantController extends Controller
             ],
 
             [
-                'nom.max' => 'Le nom du restaurant doit contenir 255 caractères maximum',
+                'name.max' => 'Le nom du restaurant doit contenir 255 caractères maximum',
                 'city.max' => 'La ville doit contenir 255 caractères maximum',
                 'address.max' => 'Ladresse doit contenir 255 caractères maximum',
                 'phone.regex' => 'Le format de téléphone est invalide.',
-                'cp.regex' => 'Le format du code postal est invalide.'
+                'cp.regex' => 'Le format du code postal est invalide.',
+
+                'name.required' => 'Renseignez ici le nom du restaurant',
+                'phone.required' => 'Renseignez ici le numéro de téléphone du restaurant',
+                'address.required' => 'Renseignez ici l\'adresse du restaurant',
+                'city.required' => 'Renseignez ici la ville du restaurant',
+                'cp.required' => 'Renseignez ici le code postale du restaurant',
+
 
             ]
         );
@@ -108,11 +115,18 @@ class RestaurantController extends Controller
             ],
 
             [
-                'nom.max' => 'Le nom du restaurant doit contenir 255 caractères maximum',
+                'name.max' => 'Le nom du restaurant doit contenir 255 caractères maximum',
                 'city.max' => 'La ville doit contenir 255 caractères maximum',
                 'address.max' => 'Ladresse doit contenir 255 caractères maximum',
                 'phone.regex' => 'Le format de téléphone est invalide.',
                 'cp.regex' => 'Le format du code postal est invalide.',
+
+                'name.required' => 'Renseignez ici le nom du restaurant',
+                'phone.required' => 'Renseignez ici le numéro de téléphone du restaurant',
+                'address.required' => 'Renseignez ici l\'adresse du restaurant',
+                'city.required' => 'Renseignez ici la ville du restaurant',
+                'cp.required' => 'Renseignez ici le code postale du restaurant',
+
             ]
         );
 
