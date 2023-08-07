@@ -1,37 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <h1>{{$product->name}}</h1>
-    <div>
-        <div>
-            {{$product->price}}
-        </div>
-        <div>{{$product->detail}}
-</div>
-       
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-3xl text-gray-800 text-center leading-tight">
+
+        </h2>
+    </x-slot>
+
+    <div class="flex justify-center items-center h-full">
+        <x-product-detail-card :product="$product" />
     </div>
 
-    <div>
-        <img src="{{$product->image}}" alt="">
-    </div>
-
-    <div>
-        {{$product->restaurant->name}}
-    </div>
-    @if ($product->category != null)
-       category : {{$product->category->name}}
-    @endif
    
-
-    <a class="" href="/products/deleteProduct/{{$product->id}}">Supprimer</a>
-    <a class="" href="/products/{{$product->id}}/edit">Modifier</a>
-
-
-</body>
-</html>
+    <div class="flex justify-center space-x-4 mt-4">
+        <a class="text-blue-600 hover:text-blue-800" href="/products/deleteProduct/{{$product->id}}">Supprimer</a>
+        <a class="text-blue-600 hover:text-blue-800" href="/products/{{$product->id}}/edit">Modifier</a>
+    </div>
+</x-app-layout>
