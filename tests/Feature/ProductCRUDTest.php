@@ -2,8 +2,10 @@
 
 namespace Tests\Feature;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\Restaurant;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -15,13 +17,17 @@ class ProductCRUDTest extends TestCase
     public function test_create_product()
     {
         $restaurant = Restaurant::factory()->create();
+        $category = Category::factory()->create();
+        $user = User::factory()->create();
 
-        $response = $this->post('/products/store', [
+        $response = $this->actingAs($user)->post('/products/store', [
             'name' => 'Toto',
             'detail' => 'tata',
             'price' => 10.99,
             'restaurant' => $restaurant->id,
+            'category' => $category->id
         ]);
+
 
         $response->assertRedirect('/products');
     }
@@ -29,12 +35,16 @@ class ProductCRUDTest extends TestCase
     public function test_error_create_product()
     {
         $restaurant = Restaurant::factory()->create();
+        $category = Category::factory()->create();
+        $user = User::factory()->create();
 
-        $response = $this->post('/products/store', [
+
+        $response = $this->actingAs($user)->post('/products/store', [
             'name' => 'New Product',
             'detail' => 'Product details',
             'price' => 'ee',
             'restaurant' => $restaurant->id,
+            'category' => $category->id
         ]);
     
         $response->assertRedirect();
@@ -46,8 +56,9 @@ class ProductCRUDTest extends TestCase
     public function test_delete_product()
     {
         $product = Product::factory()->create();
+        $user = User::factory()->create();
 
-        $response = $this->get("/products/deleteProduct/{$product->id}");
+        $response = $this->actingAs($user)->get("/products/deleteProduct/{$product->id}");
 
         $response->assertRedirect('/products');
 
@@ -60,12 +71,15 @@ class ProductCRUDTest extends TestCase
     {
         $product = Product::factory()->create();
         $restaurant = Restaurant::factory()->create();
+        $category = Category::factory()->create();
+        $user = User::factory()->create();
 
-        $response = $this->put("/products/{$product->id}/edit", [
+        $response = $this->actingAs($user)->put("/products/{$product->id}/edit", [
             'name' => 'Toto tata',
             'detail' => 'ttotototo',
             'price' => 5,
             'restaurant' => $restaurant->id,
+            'category' => $category->id
         ]);
 
         $response->assertRedirect('/products');
@@ -75,8 +89,9 @@ class ProductCRUDTest extends TestCase
     {
         $product = Product::factory()->create();
         $restaurant = Restaurant::factory()->create();
+        $user = User::factory()->create();
 
-        $response = $this->put("/products/{$product->id}/edit", [
+        $response = $this->actingAs($user)->put("/products/{$product->id}/edit", [
             'name' => 'Toto tata',
             'detail' => 'ttotototo',
             'price' => 'zd',

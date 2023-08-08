@@ -1,23 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+<x-app-layout>
 
-    {{$restaurant->name}}
-    {{$restaurant->phone}}
-    {{$restaurant->city}}
+    <div class="mb-15">
+        <div class="mb-10">
+            <x-restaurant-card-detail :restaurant="$restaurant" :availableDays="$restaurant->availableDays" />
+        </div>
 
-    <img src="$restaurant->image}}" alt="">
+        <div class="flex justify-center space-x-4 mt-4">
+            <a class="text-blue-600 hover:text-blue-800"
+                href="/restaurants/deleteRestaurant/{{ $restaurant->id }}">Supprimer</a>
+            <a class="text-blue-600 hover:text-blue-800" href="/restaurants/{{ $restaurant->id }}/edit">Modifier</a>
+        </div>
+    </div>
 
+    <br>
+    <br>
+    <div class="font-bold text-xl mb-8 ml-8 text-center">
+        Les Produits
+    </div>
 
-    <a class="" href="/restaurants/deleteRestaurant/{{$restaurant->id}}">Supprimer</a>
-    <a class="" href="/restaurants/{{$restaurant->id}}/edit">Modifier</a>
+    <div class="flex flex-wrap justify-center gap-9">
+        @foreach ($restaurant->products as $product)
+            <x-product-card-restaurant :product="$product" />
+        @endforeach
+    </div>
 
+</x-app-layout>
 
- 
-</html>

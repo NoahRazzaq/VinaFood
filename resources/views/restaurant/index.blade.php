@@ -1,20 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    @foreach ($restaurants as $restaurant)
-    
-    <div>
-        <a href="{{ route('restaurant.show', ['id' => $restaurant->id]) }}">
-            {{$restaurant->name}}
-        </a>
+<x-app-layout>
+
+    <x-slot name="header">
+        <h2 class="font-semibold text-3xl text-gray-800 text-center leading-tight">
+            Les restaurants
+        </h2>
+    </x-slot>
+
+    <div class="flex flex-wrap justify-center gap-9">
+        @foreach ($restaurants as $restaurant)
+            <x-restaurant-card :restaurant="$restaurant" :availableDays="$restaurant->availableDays" />
+        @endforeach
     </div>
 
-    @endforeach
-</body>
-</html>
+
+
+
+</x-app-layout>
