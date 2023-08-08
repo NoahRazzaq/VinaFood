@@ -7,7 +7,7 @@
 
     <div class="flex items-center justify-center h-full">
 
-        <form method="POST" action="/products/store" class="space-y-10 w-full max-w-md">
+        <form method="POST" action="/products/store" class="space-y-10 w-full max-w-md" enctype="multipart/form-data">
             @csrf
             <div class="mb-6">
                 <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Nom</label>

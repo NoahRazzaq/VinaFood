@@ -10,7 +10,7 @@ class RestaurantController extends Controller
 {
     public function index()
     {
-        $restaurants = Restaurant::all();
+        $restaurants = Restaurant::with('availableDays')->get();
 
         return view('restaurant/index', [
             'restaurants' => $restaurants
@@ -19,7 +19,7 @@ class RestaurantController extends Controller
 
     public function show($idRestaurant)
     {
-        $restaurant = Restaurant::with('products')->findOrFail($idRestaurant);
+        $restaurant = Restaurant::with('products', 'availableDays')->findOrFail($idRestaurant);
 
         return view('restaurant/show', [
             'restaurant' => $restaurant

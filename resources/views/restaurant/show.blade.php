@@ -1,20 +1,28 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ $restaurant->name }}
-        </h2>
-    </x-slot>
 
-    {{ $restaurant->name }}
-    {{ $restaurant->phone }}
-    {{ $restaurant->city }}
+    <div class="mb-15">
+        <div class="mb-10">
+            <x-restaurant-card-detail :restaurant="$restaurant" :availableDays="$restaurant->availableDays" />
+        </div>
 
-    @foreach ($restaurant->products as $product)
-        <p>{{ $product->name }}</p>
-    @endforeach
+        <div class="flex justify-center space-x-4 mt-4">
+            <a class="text-blue-600 hover:text-blue-800"
+                href="/restaurants/deleteRestaurant/{{ $restaurant->id }}">Supprimer</a>
+            <a class="text-blue-600 hover:text-blue-800" href="/restaurants/{{ $restaurant->id }}/edit">Modifier</a>
+        </div>
+    </div>
 
+    <br>
+    <br>
+    <div class="font-bold text-xl mb-8 ml-8 text-center">
+        Les Produits
+    </div>
 
-    <a class="" href="/restaurants/deleteRestaurant/{{ $restaurant->id }}">Supprimer</a>
-    <a class="" href="/restaurants/{{ $restaurant->id }}/edit">Modifier</a>
+    <div class="flex flex-wrap justify-center gap-9">
+        @foreach ($restaurant->products as $product)
+            <x-product-card-restaurant :product="$product" />
+        @endforeach
+    </div>
 
 </x-app-layout>
+

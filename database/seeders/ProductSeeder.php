@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\Restaurant;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -15,9 +16,13 @@ class ProductSeeder extends Seeder
     public function run(): void
     {
         Restaurant::all()->each(function ($restaurant) {
-            Product::factory(10)->create([
-                'restaurant_id' => $restaurant->id,
-            ]);
+            $categories = Category::all();
+            $categories->each(function ($category) use ($restaurant) {
+                Product::factory(5)->create([
+                    'restaurant_id' => $restaurant->id,
+                    'category_id' => $category->id,
+                ]);
+            });
         });
     }
 }
