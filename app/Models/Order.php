@@ -4,21 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Product extends Model
+class Order extends Model
 {
     use HasFactory;
 
-    protected $table = "products";
+    protected $table = "orders";
     protected $primaryKey = "id";
     public $timestamps = false;
 
     protected $fillable = [
-        'name', 'detail', 'price', 'image', 'restaurant_id', 'category_id'
+        'restaurant_id'
     ];
 
-
-    public function restaurant()
+    public function restaurant(): BelongsTo
     {
         return $this->belongsTo(
             Restaurant::class,
@@ -27,17 +27,19 @@ class Product extends Model
         );
     }
 
-    public function category()
+    public function products()
     {
-        return $this->belongsTo(
-            Category::class,
-            'category_id',
-            'id'
-        );
+        return $this->belongsToMany(
+            Product::class,
+            'orderline'
+        )
+            ->using(OrderLine::class)
+            ->withPivot(['quantity']);
     }
 
-    public function orderlines(){
+
+    public function orderlines()
+    {
         return $this->hasMany(OrderLine::class);
     }
-
 }
