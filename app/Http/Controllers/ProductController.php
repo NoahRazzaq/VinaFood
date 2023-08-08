@@ -11,7 +11,7 @@ class ProductController extends Controller
 {
     public function index ()
     {
-        $products = Product::all();
+        $products = Product::inRandomOrder()->get();
         return view("product/index", 
             ['products' => $products]);
     }
@@ -115,7 +115,7 @@ class ProductController extends Controller
 
             ]
         );
-        
+
         $product->restaurant_id = $request->restaurant;
         $product->category_id = $request->category;
         if ($request->hasFile('image')) {

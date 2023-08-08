@@ -8,7 +8,7 @@
     <div class="flex flex-wrap justify-center">
         @foreach ($products as $product)
             <div class="w-full md:w-1/3 p-10">
-                <x-restaurant-card :restaurant="$restaurant" :availableDays="$restaurant->availableDays" />
+                <x-product-card :product="$product"/>
                 </div>
         @endforeach
     </div>
