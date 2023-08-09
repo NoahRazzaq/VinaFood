@@ -13,9 +13,8 @@
         </svg>
     </button>
 
-    <img src="/storage/{{ $product->image }}"
+    <img src="{{ asset('/storage/' . $product->image) }}"
         alt="" class="h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72" />
-
     <div class="relative border border-gray-100 bg-white p-6">
         <span class="whitespace-nowrap bg-yellow-400 px-3 py-1.5 text-xs font-medium">
             {{ $product->restaurant->name }}

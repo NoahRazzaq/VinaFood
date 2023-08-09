@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="flex justify-center items-center h-full">
-        <x-product-detail-card :product="$product" />
+        <x-product-detail-card :product="$product" :users="$users" />
     </div>
 
    
