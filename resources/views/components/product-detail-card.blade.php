@@ -29,15 +29,15 @@
             {{ $product->detail }}
         </p>
 
-        <form action="">
+        <form method="POST" action="{{ route('cart.store', $product->id) }}">
+            @csrf
             <input type="number" min="1" placeholder="Votre quantité" name="quantity" id="quantity">
             <select name="user_id" id="user_id">
                 @foreach ($users as $user)
-                {{-- <option value={{$user->id}}> {{$user->name}}  </option> --}}
                 <option value={{$user->id}} @selected($user->id == Auth::user()->id)> {{$user->name}}</option>
                 @endforeach
             </select>
-            <button class="block w-full rounded bg-yellow-400 p-4 text-sm font-medium transition hover:scale-105">
+            <button type="submit" class="block w-full rounded bg-yellow-400 p-4 text-sm font-medium transition hover:scale-105">
                 Commander
             </button>
         </form>

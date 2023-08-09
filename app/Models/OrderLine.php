@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 class OrderLine extends Pivot
 {
     use HasFactory;
-    protected $table = "orderlines";
+    protected $table = "orderline";
     protected $primaryKey = "id";
     public $timestamps = false;
 

@@ -15,7 +15,7 @@
     <br>
     <br>
     <div class="font-bold text-xl mb-8 ml-8 text-center">
-        Les Produits
+        Les Produits ({{$restaurant->products->count()}})
     </div>
 
     <div class="flex flex-wrap justify-center gap-9">
