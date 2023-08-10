@@ -13,8 +13,8 @@
         </svg>
     </button>
 
-    <img src="{{ asset('/storage/' . $product->image) }}"
-        alt="" class="h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72" />
+    <img src="{{ asset('/storage/' . $product->image) }}" alt=""
+        class="h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72" />
 
     <div class="relative border border-gray-100 bg-white p-6">
         <span class="whitespace-nowrap bg-yellow-400 px-3 py-1.5 text-xs font-medium">
@@ -32,12 +32,28 @@
         <form method="POST" action="{{ route('cart.store', $product->id) }}">
             @csrf
             <input type="number" min="1" placeholder="Votre quantité" name="quantity" id="quantity">
+            @error('quantity')
+                <div class="flex items-center p-2 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:text-red-400"
+                    role="alert">
+                    <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                    </svg>
+                    <span class="sr-only">Info</span>
+                    <div>
+                        <span class="font-medium">{{ $message }} </span>
+                    </div>
+                </div>
+            @enderror
             <select name="user_id" id="user_id">
                 @foreach ($users as $user)
-                <option value={{$user->id}} @selected($user->id == Auth::user()->id)> {{$user->name}}</option>
+                    <option value={{ $user->id }} @selected($user->id == Auth::user()->id)> {{ $user->name }}</option>
                 @endforeach
             </select>
-            <button type="submit" class="block w-full rounded bg-yellow-400 p-4 text-sm font-medium transition hover:scale-105">
+            <button type="submit"
+                class="block w-full rounded bg-yellow-400 p-4 text-sm font-medium transition hover:scale-105">
+
                 Commander
             </button>
         </form>

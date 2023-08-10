@@ -31,11 +31,22 @@ class OrderLineController extends Controller
             'created_at' => Carbon::today()
         ]);
 
+        $validated = $request->validate(
+            [
+                
+                'quantity' => 'required|numeric',
+            ],
+
+            [
+                'quantity.required' => 'Renseignez ici la quantité',
+            ]
+        );
+
         // create orderline
         $orderline = OrderLine::create([
             'order_id' => $order->id,
             'product_id' => $product->id,
-            'quantity' => $request->input('quantity'),
+            'quantity' => $validated['quantity'],
             'user_id' => $request->input('user_id'),
         ]);
 
