@@ -34,8 +34,8 @@
                                 </div>
                                 <div class="flex flex-col justify-between ml-4 flex-grow">
                                     <span class="font-bold text-sm">{{ $orderline->user->name }}</span>
-                                    <a href="#"
-                                        class="font-semibold hover:text-red-500 text-gray-500 text-xs">Remove</a>
+                                    <a href="/cart/delete/{{$order->id}}"
+                                        class="font-semibold hover:text-red-500 text-gray-500 text-xs">remove</a>
                                 </div>
                             </div>
                             <div class="flex justify-center w-1/5"> <!-- Quantity -->
