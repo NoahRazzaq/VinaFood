@@ -6,7 +6,7 @@
     </x-slot>
 
 
-    <h1>Commandes du : {{ date('d-m-Y') }}</h1>
+    <h1>Commandes du : {{ date('d/m/Y') }}</h1>
 
     @foreach ($ordersByRestaurant as $restaurantId => $restaurantOrders)
 

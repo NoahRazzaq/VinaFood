@@ -7,9 +7,9 @@
                 <h1 class="font-semibold text-2xl"> {{ $restaurantOrders->first()->restaurant->name }}</h1>
                 <h2 class="font-semibold text-2xl">
                     @if ($restaurantOrders->count() > 1)
-                        <h2> {{ $restaurantOrders->count() }} plats commmandés </h2>
+                        <h2> {{ $restaurantOrders->count() }} plats commandés </h2>
                     @else
-                        <h2> {{ $restaurantOrders->count() }} plat commmandé </h2>
+                        <h2> {{ $restaurantOrders->count() }} plat commandé </h2>
                     @endif
             </div>
             <div class="flex mt-10 mb-5">
