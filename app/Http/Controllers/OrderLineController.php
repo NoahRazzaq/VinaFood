@@ -10,10 +10,10 @@ use Illuminate\Http\Request;
 
 class OrderLineController extends Controller
 {
-    public function index ()
+    public function index()
     {
         $orders = Order::whereDate('created_at', Carbon::today())->get();
-        
+
         $ordersByRestaurant = $orders->groupBy('restaurant_id');
 
         return view("cart/index", [
@@ -22,7 +22,7 @@ class OrderLineController extends Controller
         ]);
     }
 
-    public function store (Request $request, Product $product)
+    public function store(Request $request, Product $product)
     {
         //create order
 
@@ -33,7 +33,6 @@ class OrderLineController extends Controller
 
         $validated = $request->validate(
             [
-                
                 'quantity' => 'required|numeric',
             ],
 
@@ -53,4 +52,11 @@ class OrderLineController extends Controller
         return redirect("/cart");
     }
 
+    public function destroy(Order $order)
+    {
+        $order->orderlines()->delete();
+        $order->delete(); 
+        
+        return redirect()->back();
+    }
 }
