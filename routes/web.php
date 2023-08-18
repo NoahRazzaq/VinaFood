@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AvailableDayController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
@@ -73,6 +74,14 @@ Route::middleware('auth')->group(function () {
             Route::get('/', 'index')->name('cart.index');
             Route::post('/store/{product}', 'store')->name('cart.store');
             Route::get('/delete/{order}', 'destroy')->name('cart.destroy');
+        });
+    });
+
+    Route::controller(AvailableDayController::class)->group(function () {
+        Route::prefix('/days')->group(function () {
+            Route::get('/', 'index')->name('day.index');
+            Route::get('/{day}', 'show')->name('day.show');
+
         });
     });
 });
