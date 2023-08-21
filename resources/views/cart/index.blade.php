@@ -5,13 +5,15 @@
         </h2>
     </x-slot>
 
-
-    <h1>Commandes du : {{ date('d/m/Y') }}</h1>
-
-    @foreach ($ordersByRestaurant as $restaurantId => $restaurantOrders)
-
-        <x-cart-card :restaurantOrders="$restaurantOrders" />
-
-    @endforeach
-
+    <div class="flex justify-center items-center">
+        <div class="w-full max-w-8xl">
+            <h1 class="text-center text-xl mb-4">Commandes du : {{ date('d/m/Y') }}</h1>
+            
+            @foreach ($ordersByRestaurant as $restaurantId => $restaurantOrders)
+                <div class="mx-auto mb-6">
+                    <x-cart-card :restaurantOrders="$restaurantOrders" />
+                </div>
+            @endforeach
+        </div>
+    </div>
 </x-app-layout>
