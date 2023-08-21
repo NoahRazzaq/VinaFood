@@ -22,10 +22,12 @@ class Restaurant extends Model
         'image'
     ];
 
-    public function products(){
-        return $this->hasMany(Product::class,
-        'restaurant_id',
-        'id'
+    public function products()
+    {
+        return $this->hasMany(
+            Product::class,
+            'restaurant_id',
+            'id'
         );
     }
 
@@ -35,5 +37,12 @@ class Restaurant extends Model
         return $this->belongsToMany(AvailableDay::class, 'restaurant_available_day', 'restaurant_id', 'available_day_id');
     }
 
-
+    public function orders()
+    {
+        return $this->hasMany(
+            Order::class,
+            'order_id',
+            'id'
+        );
+    }
 }

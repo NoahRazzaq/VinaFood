@@ -7,7 +7,7 @@
 
     <div class="flex items-center justify-center h-full">
 
-        <form method="post" action="{{ route('product.update', $product->id) }}" class="space-y-10 w-full max-w-md">
+        <form method="post" action="{{ route('product.update', $product->id) }}" class="space-y-10 w-full max-w-md" enctype="multipart/form-data">
             @csrf
             @method('put')
             <div class="mb-6">
@@ -84,6 +84,10 @@
                 <input type="file" id="image" name="image"
                     class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="">
+                    @if ($product->image)
+                    <img src="{{ asset('storage/' . $product->image) }}"
+                         alt="Product Image" class="h-32 mt-2">
+                @endif
             </div>
 
             <div class="mb-6">

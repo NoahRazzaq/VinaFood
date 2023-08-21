@@ -7,7 +7,8 @@ use App\Models\Product;
 use App\Models\Restaurant;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class ProductCRUDTest extends TestCase
@@ -16,16 +17,20 @@ class ProductCRUDTest extends TestCase
 
     public function test_create_product()
     {
+        Storage::fake('public'); // This is to fake file storage
+
         $restaurant = Restaurant::factory()->create();
         $category = Category::factory()->create();
         $user = User::factory()->create();
+
 
         $response = $this->actingAs($user)->post('/products/store', [
             'name' => 'Toto',
             'detail' => 'tata',
             'price' => 10.99,
             'restaurant' => $restaurant->id,
-            'category' => $category->id
+            'category' => $category->id,
+            'image' => UploadedFile::fake()->image('test_image.jpg'),
         ]);
 
 
