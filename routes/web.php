@@ -41,9 +41,9 @@ Route::middleware('auth')->group(function () {
             Route::get('/', 'index')->name('product.index');
             Route::get('/create', 'create')->name('product.create');
             Route::post('/store', 'store')->name('product.store');
-            Route::get('/{id}', 'show')->name('product.show');
+            Route::get('/{product}', 'show')->name('product.show');
             Route::get('/deleteProduct/{product}', 'delete')->name('product.delete');
-            Route::get('/{id}/edit', 'edit')->name('product.edit');
+            Route::get('/{product}/edit', 'edit')->name('product.edit');
             Route::put('/{product}/edit', 'update')->name('product.update');
         });
     });
@@ -53,9 +53,9 @@ Route::middleware('auth')->group(function () {
             Route::get('/', 'index')->name('restaurant.index');
             Route::get('/create', 'create')->name('restaurant.create');
             Route::post('/store', 'store')->name('restaurant.store');
-            Route::get('/{id}', 'show')->name('restaurant.show');
+            Route::get('/{restaurant}', 'show')->name('restaurant.show');
             Route::get('/deleteRestaurant/{restaurant}', 'delete')->name('restaurant.delete');
-            Route::get('/{id}/edit', 'edit')->name('restaurant.edit');
+            Route::get('/{restaurant}/edit', 'edit')->name('restaurant.edit');
             Route::put('/{restaurant}/edit', 'update')->name('restaurant.update');
         });
     });
@@ -65,7 +65,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/', 'index')->name('category.index');
             Route::get('/create', 'create')->name('category.create');
             Route::post('/store', 'store')->name('category.store');
-            Route::get('/{id}', 'show')->name('category.show');
+            Route::get('/{category}', 'show')->name('category.show');
             Route::get('/deleteCategory/{category}', 'delete')->name('category.delete');
         });
     });

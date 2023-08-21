@@ -1,7 +1,7 @@
 @props(['product'])
 
 
-<a href="{{ route('product.show', ['id' => $product->id]) }}" class="group relative block overflow-hidden">
+<a href="{{ route('product.show', ['product' => $product->id]) }}" class="group relative block overflow-hidden">
 
     <form method="POST" action="{{ route('favorite.store', $product->id) }}">
         @csrf
