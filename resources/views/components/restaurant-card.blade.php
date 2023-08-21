@@ -1,6 +1,6 @@
 @props(['restaurant', 'availableDays'])
 
-<a href="{{ route('restaurant.show', ['id' => $restaurant->id]) }}" class="max-w-sm rounded overflow-hidden shadow-lg">
+<a href="{{ route('restaurant.show', ['restaurant' => $restaurant->id]) }}" class="max-w-sm rounded overflow-hidden shadow-lg">
     <img class="w-full" src="https://images.unsplash.com/photo-1599481238640-4c1288750d7a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2664&q=80" alt="Sunset in the mountains">
     <div class="px-6 py-4">
         <div class="font-bold text-xl mb-2">{{ $restaurant->name }}</div>

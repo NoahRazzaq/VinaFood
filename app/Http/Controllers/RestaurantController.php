@@ -17,10 +17,8 @@ class RestaurantController extends Controller
         ]);
     }
 
-    public function show($idRestaurant)
+    public function show(Restaurant $restaurant)
     {
-        $restaurant = Restaurant::with('products', 'availableDays')->findOrFail($idRestaurant);
-
         return view('restaurant/show', [
             'restaurant' => $restaurant
         ]);
@@ -87,9 +85,8 @@ class RestaurantController extends Controller
         return redirect("/restaurants");
     }
 
-    public function edit($idRestaurant, Restaurant $restaurant)
+    public function edit(Restaurant $restaurant)
     {
-        $restaurant = Restaurant::findOrFail($idRestaurant);
         $days = AvailableDay::all();
 
         $selectedDays = $restaurant->availableDays()->select('available_days.id')->pluck('id')->toArray();
