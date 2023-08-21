@@ -14,7 +14,7 @@ class Product extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'name', 'detail', 'price', 'image', 'restaurant_id', 'category_id'
+        'name', 'detail', 'price', 'image','is_liked', 'restaurant_id', 'category_id'
     ];
 
 
@@ -38,6 +38,11 @@ class Product extends Model
 
     public function orderlines(){
         return $this->hasMany(OrderLine::class);
+    }
+
+    public function favorites()
+    {
+        return $this->belongsToMany(User::class, 'favorites', 'product_id', 'user_id');
     }
 
 }

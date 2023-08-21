@@ -12,7 +12,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::inRandomOrder()->get();
+        $products = Product::all();
         return view(
             "product/index",
             ['products' => $products]

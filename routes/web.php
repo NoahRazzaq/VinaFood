@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AvailableDayController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -81,7 +82,13 @@ Route::middleware('auth')->group(function () {
         Route::prefix('/days')->group(function () {
             Route::get('/', 'index')->name('day.index');
             Route::get('/{day}', 'show')->name('day.show');
+        });
+    });
 
+    Route::controller(FavoriteController::class)->group(function () {
+        Route::prefix('/favorites')->group(function () {
+            Route::get('/', 'index')->name('favorite.index');
+            Route::post('/store/{product}', 'store')->name('favorite.store');
         });
     });
 });

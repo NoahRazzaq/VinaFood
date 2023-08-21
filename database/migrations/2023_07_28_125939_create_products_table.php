@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('detail');
             $table->double('price',4,2);
             $table->string('image')->nullable();
+            $table->boolean('is_liked')->default(false);
             $table->unsignedBigInteger('restaurant_id');
             $table->unsignedBigInteger('category_id')->nullable();
             $table->timestamps();
