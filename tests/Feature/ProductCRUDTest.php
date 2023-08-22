@@ -14,22 +14,33 @@ use Tests\TestCase;
 class ProductCRUDTest extends TestCase
 {
     use RefreshDatabase;
+    private $user;
+    private $restaurant;
+    private $category;
+    private $product;
+    
+
+    public function setUp(): void
+    {
+        parent::setUp();
+        Storage::fake('public');
+        
+        $this->user = User::factory()->create();
+        $this->restaurant = Restaurant::factory()->create();
+        $this->category = Category::factory()->create();
+        $this->product = Product::factory()->create();
+
+    }
 
     public function test_create_product()
     {
         Storage::fake('public'); // This is to fake file storage
-
-        $restaurant = Restaurant::factory()->create();
-        $category = Category::factory()->create();
-        $user = User::factory()->create();
-
-
-        $response = $this->actingAs($user)->post('/products/store', [
+        $response = $this->actingAs($this->user)->post('/products/store', [
             'name' => 'Toto',
             'detail' => 'tata',
             'price' => 10.99,
-            'restaurant' => $restaurant->id,
-            'category' => $category->id,
+            'restaurant' => $this->restaurant->id,
+            'category' => $this->category->id,
             'image' => UploadedFile::fake()->image('test_image.jpg'),
         ]);
 
@@ -39,17 +50,13 @@ class ProductCRUDTest extends TestCase
 
     public function test_error_create_product()
     {
-        $restaurant = Restaurant::factory()->create();
-        $category = Category::factory()->create();
-        $user = User::factory()->create();
 
-
-        $response = $this->actingAs($user)->post('/products/store', [
+        $response = $this->actingAs($this->user)->post('/products/store', [
             'name' => 'New Product',
             'detail' => 'Product details',
             'price' => 'ee',
-            'restaurant' => $restaurant->id,
-            'category' => $category->id
+            'restaurant' => $this->restaurant->id,
+            'category' => $this->category->id
         ]);
     
         $response->assertRedirect();
@@ -60,31 +67,25 @@ class ProductCRUDTest extends TestCase
 
     public function test_delete_product()
     {
-        $product = Product::factory()->create();
-        $user = User::factory()->create();
 
-        $response = $this->actingAs($user)->get("/products/deleteProduct/{$product->id}");
+        $response = $this->actingAs($this->user)->get("/products/deleteProduct/{$this->product->id}");
 
         $response->assertRedirect('/products');
 
         $this->assertDatabaseMissing('products', [
-            'id' => $product->id,
+            'id' => $this->product->id,
         ]);
     }
 
     public function test_update_product()
     {
-        $product = Product::factory()->create();
-        $restaurant = Restaurant::factory()->create();
-        $category = Category::factory()->create();
-        $user = User::factory()->create();
 
-        $response = $this->actingAs($user)->put("/products/{$product->id}/edit", [
+        $response = $this->actingAs($this->user)->put("/products/{$this->product->id}/edit", [
             'name' => 'Toto tata',
             'detail' => 'ttotototo',
             'price' => 5,
-            'restaurant' => $restaurant->id,
-            'category' => $category->id
+            'restaurant' => $this->restaurant->id,
+            'category' => $this->category->id
         ]);
 
         $response->assertRedirect('/products');
@@ -92,26 +93,16 @@ class ProductCRUDTest extends TestCase
 
     public function test_error_update_product()
     {
-        $product = Product::factory()->create();
-        $restaurant = Restaurant::factory()->create();
-        $user = User::factory()->create();
 
-        $response = $this->actingAs($user)->put("/products/{$product->id}/edit", [
+        $response = $this->actingAs($this->user)->put("/products/{$this->product->id}/edit", [
             'name' => 'Toto tata',
             'detail' => 'ttotototo',
             'price' => 'zd',
-            'restaurant' => $restaurant->id,
+            'restaurant' => $this->restaurant->id,
         ]);
 
         $response->assertStatus(302);
         $response->assertSessionHasErrors(['price']);
 
     }
-
-
-    
-
-
-
-
 }
