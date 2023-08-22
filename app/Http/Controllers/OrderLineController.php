@@ -49,6 +49,9 @@ class OrderLineController extends Controller
             'user_id' => $request->input('user_id'),
         ]);
 
+        smilify('success', 'Produit ajouté au panier 🛒 !');
+
+
         return redirect("/cart");
     }
 

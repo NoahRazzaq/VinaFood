@@ -78,6 +78,7 @@ class ProductController extends Controller
         ]);
 
 
+
         return redirect('/products');
     }
 
@@ -85,6 +86,8 @@ class ProductController extends Controller
     public function delete(Product $product)
     {
         $product->delete();
+        smilify('success', 'Produit supprimé avec succès !');
+
         return redirect("/products");
     }
 
@@ -136,6 +139,8 @@ class ProductController extends Controller
             $product->image = $imageRelativePath;
             $product->save();
         }
+
+        smilify('success', 'Produit modifié avec succès !');
 
         return redirect("/products");
     }

@@ -6,6 +6,7 @@
         </h2>
     </x-slot>
 
+
     <div>
         <h1>Les produits disponible aujourd'hui </h1>
     </div>
@@ -24,8 +25,18 @@
         <button id="prevBtn" class="px-2 py-1 bg-gray-300">Précédent</button>
         <button id="nextBtn" class="px-2 py-1 bg-gray-300">Suivant</button>
     </div>
-    
 
+    
+    
+@foreach ($favoriteProducts as $product)
+<div class="w-1/4 px-9">
+<x-product-card :product="$product" />
+</div>
+    
+@endforeach
+
+
+<div></div>
 
 
 
@@ -56,3 +67,5 @@
         }
     });
 </script>
+
+

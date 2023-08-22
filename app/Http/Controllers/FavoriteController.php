@@ -20,6 +20,7 @@ class FavoriteController extends Controller
 
         $favoriteProducts = $user->favorites;
 
+
         return view(
             'favorite/index',
             [
@@ -43,12 +44,15 @@ class FavoriteController extends Controller
                     'product_id' => $product->id,
                     'user_id' => $user->id
                 ]);
+                smilify('success', 'Produit ajouté au favoris ❤️');
             }
         } else {
             $user->favorites()->detach($product->id);
         }
 
         $product->update(['is_liked' => $isLiked]);
+
+
 
         return redirect()->back();
     }

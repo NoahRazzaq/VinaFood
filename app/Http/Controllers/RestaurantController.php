@@ -76,12 +76,17 @@ class RestaurantController extends Controller
         /** @var Restaurant $restaurant */
         $restaurant->availableDays()->attach($selectedDays);
 
+        smilify('success', 'Restaurant ajouté avec succès !');
+
+
         return redirect('/restaurants');
     }
 
     public function delete(Restaurant $restaurant)
     {
         $restaurant->delete();
+        smilify('success', 'Restaurant supprimé avec succès !');
+
         return redirect("/restaurants");
     }
 
@@ -135,6 +140,9 @@ class RestaurantController extends Controller
             $days = $request->input('days');
             $restaurant->availableDays()->attach($days);
         }
+
+        smilify('success', 'Restaurant modifié avec succès !');
+
 
         return redirect('/restaurants');
     }
