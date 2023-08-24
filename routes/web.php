@@ -75,6 +75,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/', 'index')->name('cart.index');
             Route::post('/store/{product}', 'store')->name('cart.store');
             Route::get('/delete/{order}', 'destroy')->name('cart.destroy');
+            Route::get('/confirmOrder/{order}', 'confirmOrder')->name('cart.confirmOrder');
         });
     });
 

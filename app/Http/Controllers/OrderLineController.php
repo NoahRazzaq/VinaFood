@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\OrderLine;
 use App\Models\Product;
+use App\Notifications\OrderMail;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class OrderLineController extends Controller
 {
@@ -58,8 +61,22 @@ class OrderLineController extends Controller
     public function destroy(Order $order)
     {
         $order->orderlines()->delete();
-        $order->delete(); 
-        
+        $order->delete();
+
+        return redirect()->back();
+    }
+
+    public function confirmOrder(Order $order)
+    {
+        $user = Auth::user(); // Assuming the logged-in user is placing the order
+        $user->notify(new OrderMail($order));
+
+        $order->mail_sent = true;
+        $order->save();
+
+        smilify('success', 'Mail de confirmation envoyé !');
+
+
         return redirect()->back();
     }
 }
