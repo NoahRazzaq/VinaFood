@@ -68,14 +68,22 @@ class OrderLineController extends Controller
 
     public function confirmOrder(Order $order)
     {
-        $user = Auth::user(); // Assuming the logged-in user is placing the order
-        $user->notify(new OrderMail($order));
+        $user = Auth::user();
+        $groupedOrders = Order::where('restaurant_id', $order->restaurant_id)
+            ->where('mail_sent', 0) 
+            ->get()
+            ->groupBy('restaurant_id');
 
-        $order->mail_sent = true;
-        $order->save();
+        $user->notify(new OrderMail($groupedOrders));
+
+        $groupedOrders->each(function ($orders) {
+            $orders->each(function ($order) {
+                $order->update(['mail_sent' => true]);
+            });
+        });
+
 
         smilify('success', 'Mail de confirmation envoyé !');
-
 
         return redirect()->back();
     }

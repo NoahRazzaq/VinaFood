@@ -17,7 +17,8 @@ class OrderLine extends Pivot
         'order_id', 'product_id', 'quantity', 'user_id'
     ];
 
-    public function order(){
+    public function order()
+    {
         return $this->belongsTo(Order::class);
     }
 

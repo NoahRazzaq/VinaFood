@@ -7,19 +7,19 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Collection;
 
 class OrderMail extends Notification
 {
     use Queueable;
 
-    protected $order;
+    public $groupedOrders;
     /**
      * Create a new notification instance.
      */
-    public function __construct(Order $order)
+    public function __construct(Collection $groupedOrders)
     {
-        $this->order = $order;
-
+        $this->groupedOrders = $groupedOrders;
     }
 
     /**
@@ -36,11 +36,17 @@ class OrderMail extends Notification
      * Get the mail representation of the notification.
      */
     public function toMail(object $notifiable): MailMessage
-    {
+    { 
+
+
+        // dd($this->order->orderlines);
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/cart'))
-                    ->line('Thank you for using our application!');
+                    ->subject('Commande chez')
+                    // ->cc($this->order->orderlines->user->email, $this->order->orderlines->user->name)
+                    ->view('emails/orderemail', [
+                        'notifiable' => $notifiable,
+                        'groupedOrders' => $this->groupedOrders, 
+                    ]);
     }
 
     /**
