@@ -3,6 +3,8 @@
 namespace App\Notifications;
 
 use App\Models\Order;
+use App\Models\OrderLine;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -38,11 +40,19 @@ class OrderMail extends Notification
     public function toMail(object $notifiable): MailMessage
     { 
 
+        $otherUserIds = OrderLine::whereHas('order', function ($query) {
+            $query->whereIn('restaurant_id', $this->groupedOrders->keys());
+        })
+        ->where('user_id', '!=', $notifiable->id) 
+        ->pluck('user_id')
+        ->unique()
+        ->toArray();
 
-        // dd($this->order->orderlines);
+        $otherUserEmails = User::whereIn('id', $otherUserIds)->pluck('email')->toArray();
+
         return (new MailMessage)
                     ->subject('Commande chez')
-                    // ->cc($this->order->orderlines->user->email, $this->order->orderlines->user->name)
+                    ->cc($otherUserEmails) // Add other users to CC
                     ->view('emails/orderemail', [
                         'notifiable' => $notifiable,
                         'groupedOrders' => $this->groupedOrders, 
