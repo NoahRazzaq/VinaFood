@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('restaurant_id');
             $table->boolean('mail_sent')->default(false);
+            $table->string('pickup_time')->nullable();
             $table->timestamps();
 
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');

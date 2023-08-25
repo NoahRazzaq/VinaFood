@@ -15,7 +15,7 @@ class Order extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'restaurant_id','mail_sent', 'created_at'
+        'restaurant_id','mail_sent', 'pickup_time', 'created_at'
     ];
 
     public function restaurant(): BelongsTo

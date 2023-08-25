@@ -70,7 +70,7 @@ class OrderLineController extends Controller
     {
         $user = Auth::user();
         $groupedOrders = Order::where('restaurant_id', $order->restaurant_id)
-            ->where('mail_sent', 0) 
+            ->where('mail_sent', 0)
             ->get()
             ->groupBy('restaurant_id');
 
@@ -82,8 +82,21 @@ class OrderLineController extends Controller
             });
         });
 
-
+ 
         smilify('success', 'Mail de confirmation envoyé !');
+
+        return redirect()->back();
+    }
+
+    public function addPickupTime(Order $order, Request $request)
+    {
+        $pickupTime = $request->input('pickup_time');
+
+        $order->update([
+            'pickup_time' => $pickupTime,
+        ]);
+
+        smilify('success', 'Heure de récuperation ajouté !');
 
         return redirect()->back();
     }

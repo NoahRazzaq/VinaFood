@@ -76,6 +76,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/store/{product}', 'store')->name('cart.store');
             Route::get('/delete/{order}', 'destroy')->name('cart.destroy');
             Route::get('/confirmOrder/{order}', 'confirmOrder')->name('cart.confirmOrder');
+            Route::post('/addPickupTime/{order}', 'addPickupTime')->name('cart.addPickupTime');
         });
     });
 
