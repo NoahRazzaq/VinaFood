@@ -1,6 +1,4 @@
-
-<x-app-layout>
-    
+<x-email-layout>
     <x-order-email-card :groupedOrders="$groupedOrders"/>
 
-</x-app-layout>
+</x-email-layout>

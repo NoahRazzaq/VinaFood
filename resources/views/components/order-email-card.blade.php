@@ -8,7 +8,8 @@
         <div class="w-3/4 bg-white px-10 py-10">
             <div class="flex justify-between border-b pb-8">
                 <a href="{{ route('restaurant.show', ['restaurant' => $restaurantOrders->first()->restaurant->id]) }}">
-                    <h1 class="font-semibold text-xl">Commande pour {{ $restaurantOrders->first()->restaurant->name }}</h1>
+                    <h1 class="font-semibold text-xl">Commande pour {{ $restaurantOrders->first()->restaurant->name }}
+                    </h1>
                 </a>
                 <h2 class="font-semibold text-xl">
                     @if ($restaurantOrders->count() > 1)
@@ -57,6 +58,9 @@
                     </div>
                 @endforeach
             @endforeach
+            <div class="text-right">
+                Commande prête pour <strong>{{ $order->pickup_time }}</strong>
+            </div>
 @endforeach
 
 </div>
