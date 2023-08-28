@@ -4,6 +4,7 @@ namespace App\Notifications;
 
 use App\Models\Order;
 use App\Models\OrderLine;
+use App\Models\Restaurant;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -50,8 +51,12 @@ class OrderMail extends Notification
 
         $otherUserEmails = User::whereIn('id', $otherUserIds)->pluck('email')->toArray();
 
+        $restaurantName = Restaurant::whereIn('id', $this->groupedOrders->keys())
+        ->pluck('name')
+        ->implode(', ');
+
         return (new MailMessage)
-                    ->subject('Commande chez')
+                    ->subject('Commande chez '. $restaurantName)
                     ->cc($otherUserEmails) // Add other users to CC
                     ->view('emails/orderemail', [
                         'notifiable' => $notifiable,
