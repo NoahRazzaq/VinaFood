@@ -31,6 +31,8 @@ class HomeController extends Controller
             ->distinct()
             ->get();
 
+        $randomAvailableProduct = $products->random();
+
 
         //restaurants available 
         $availableRestaurantIds = Restaurant::whereHas('availableDays', function ($query) use ($currentDay) {
@@ -43,10 +45,15 @@ class HomeController extends Controller
         $user = Auth::user();
         $favoriteProducts = $user->favorites;
 
+        $favoriteProduct = $favoriteProducts->isNotEmpty() ? $favoriteProducts->random() : null;
+
+        // dd($favoriteProduct);
         return view('home', [
             'products' => $products,
             'restaurants' => $restaurants,
-            'favoriteProducts' => $favoriteProducts
+            'favoriteProducts' => $favoriteProducts,
+            'favoriteProduct' => $favoriteProduct,
+            'randomAvailableProduct' => $randomAvailableProduct
         ]);
     }
 }
