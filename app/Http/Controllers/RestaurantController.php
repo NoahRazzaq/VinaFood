@@ -62,12 +62,17 @@ class RestaurantController extends Controller
             ]
         );
 
+
+        $imagePath = $request->file('image')->store('public');
+        $imageRelativePath = str_replace('public/', '', $imagePath);
+
         $restaurant = Restaurant::create([
             'name' => $validated['name'],
             'phone' => $validated['phone'],
             'address' => $validated['address'],
             'city' => $validated['city'],
             'cp' => $validated['cp'],
+            'image' => $imageRelativePath,
 
         ]);
 

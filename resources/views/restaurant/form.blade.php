@@ -8,7 +8,7 @@
 
     <div class="flex items-center justify-center h-full">
 
-        <form method="POST" action="/restaurants/store" class="space-y-10 w-full max-w-md">
+        <form method="POST" action="/restaurants/store" class="space-y-10 w-full max-w-md" enctype="multipart/form-data">
             @csrf
             <div class="mb-6">
                 <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Nom</label>
@@ -116,6 +116,13 @@
                 @enderror
             </div>
 
+            <div class="mb-6">
+                <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Image</label>
+                <input type="file" id="image" name="image"
+                    class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="">
+            </div>
+
             <div>
                 Jour d'ouverture
             </div>
@@ -129,7 +136,6 @@
                 @endforeach
             </div>
 
-            <!-- Add the second row of 3 checkboxes -->
             <div class="grid grid-cols-3 gap-4">
                 @foreach ($days->slice(4, 3) as $day)
                     <label class="flex items-center">
