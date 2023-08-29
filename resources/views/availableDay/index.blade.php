@@ -5,9 +5,9 @@
         </h2>
     </x-slot>
 
-    <div>
+    <div class="flex justify-center">
         @foreach ($days as $day)
-        <x-day-card :day="$day" />
+            <x-day-card :day="$day" />
         @endforeach
     </div>
 </x-app-layout>

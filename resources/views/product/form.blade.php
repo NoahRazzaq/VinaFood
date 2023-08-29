@@ -88,7 +88,7 @@
                     <option selected disabled value=""></option>
                     <option value="">---Séléctionnez un restaurant---</option>
                     @foreach ($restaurants as $restaurant)
-                        <option value="{{ $restaurant->id }}">{{ $restaurant->name }}</option>
+                    <option value="{{ $restaurant->id }}" @if(request()->query('restaurant') == $restaurant->id) selected @endif>{{ $restaurant->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -100,7 +100,7 @@
                     <option selected disabled value="category"></option>
                     <option value="">---Séléctionnez une catégorie---</option>
                     @foreach ($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    <option value="{{ $category->id }}" @if(request()->query('category') == $category->id) selected @endif>{{ $category->name }}</option>
                     @endforeach
                 </select>
             </div>
