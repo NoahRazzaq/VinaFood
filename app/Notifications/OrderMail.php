@@ -40,11 +40,11 @@ class OrderMail extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     { 
-
         $otherUserIds = OrderLine::whereHas('order', function ($query) {
+            // filtre les résultats en fonction des identifiants de restaurant
             $query->whereIn('restaurant_id', $this->groupedOrders->keys());
         })
-        ->where('user_id', '!=', $notifiable->id) 
+        ->where('user_id', '!=', $notifiable->id)
         ->pluck('user_id')
         ->unique()
         ->toArray();
@@ -57,7 +57,7 @@ class OrderMail extends Notification
 
         return (new MailMessage)
                     ->subject('Commande chez '. $restaurantName)
-                    ->cc($otherUserEmails) // Add other users to CC
+                    ->cc($otherUserEmails)
                     ->view('emails/orderemail', [
                         'notifiable' => $notifiable,
                         'groupedOrders' => $this->groupedOrders, 

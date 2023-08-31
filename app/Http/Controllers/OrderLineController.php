@@ -69,6 +69,7 @@ class OrderLineController extends Controller
     public function confirmOrder(Order $order)
     {
         $user = Auth::user();
+        
         $groupedOrders = Order::where('restaurant_id', $order->restaurant_id)
             ->where('mail_sent', 0)
             ->get()
@@ -95,9 +96,7 @@ class OrderLineController extends Controller
         $order->update([
             'pickup_time' => $pickupTime,
         ]);
-
-        smilify('success', 'Heure de récuperation ajouté !');
-
+        
         return redirect()->back();
     }
 }

@@ -22,7 +22,8 @@ class OrderLine extends Pivot
         return $this->belongsTo(Order::class);
     }
 
-    public function product(){
+    public function product()
+    {
         return $this->belongsTo(Product::class);
     }
 
@@ -30,5 +31,4 @@ class OrderLine extends Pivot
     {
         return $this->belongsTo(User::class);
     }
-
 }

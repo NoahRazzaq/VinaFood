@@ -15,14 +15,17 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        Restaurant::all()->each(function ($restaurant) {
-            $categories = Category::all();
-            $categories->each(function ($category) use ($restaurant) {
-                Product::factory(5)->create([
+        $restaurants = Restaurant::all();
+        $categories = Category::all();
+
+        foreach ($restaurants as $restaurant) {
+            foreach ($categories as $category) {
+                $products = Product::factory(5)->create([
                     'restaurant_id' => $restaurant->id,
                     'category_id' => $category->id,
                 ]);
-            });
-        });
+                $restaurant->products()->saveMany($products);
+            }
+        }
     }
 }

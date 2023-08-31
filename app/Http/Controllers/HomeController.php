@@ -26,20 +26,19 @@ class HomeController extends Controller
             ->join('restaurants', 'products.restaurant_id', '=', 'restaurants.id')
             ->join('restaurant_available_day', 'restaurants.id', '=', 'restaurant_available_day.restaurant_id')
             ->join('available_days', 'restaurant_available_day.available_day_id', '=', 'available_days.id')
-            ->join('categories', 'products.category_id', '=', 'categories.id')
             ->where('available_days.day', $currentDay)
             ->distinct()
             ->get();
 
-        $randomAvailableProduct = $products->random();
+        $randomAvailableProduct = $products->isNotEmpty() ? $products->random() : null;
 
 
         //restaurants available 
-        $availableRestaurantIds = Restaurant::whereHas('availableDays', function ($query) use ($currentDay) {
+        //
+        $restaurants = Restaurant::whereHas('availableDays', function ($query) use ($currentDay) {
             $query->where('day', $currentDay);
-        })->pluck('id');
-
-        $restaurants = Restaurant::whereIn('id', $availableRestaurantIds)->get();
+        })->get();
+        
 
         //favorites product
         $user = Auth::user();
@@ -47,13 +46,20 @@ class HomeController extends Controller
 
         $favoriteProduct = $favoriteProducts->isNotEmpty() ? $favoriteProducts->random() : null;
 
+
+        $randomProducts = Product::all()->random(4);
+
+        $randomRestaurants = Restaurant::all()->random(6);
+
         // dd($favoriteProduct);
         return view('home', [
             'products' => $products,
             'restaurants' => $restaurants,
             'favoriteProducts' => $favoriteProducts,
             'favoriteProduct' => $favoriteProduct,
-            'randomAvailableProduct' => $randomAvailableProduct
+            'randomAvailableProduct' => $randomAvailableProduct,
+            'randomProducts' => $randomProducts,
+            'randomRestaurants' => $randomRestaurants
         ]);
     }
 }

@@ -20,13 +20,19 @@
         class="h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72" />
 
     <div class="relative border border-gray-100 bg-white p-6">
-        <span class="whitespace-nowrap bg-yellow-400 px-3 py-1.5 text-xs font-medium">
+        <span class="inline-block bg-yellow-400 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
             {{ $product->restaurant->name }}
+        </span>
+
+        <span class="inline-block bg-ellow-400 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+            @if ($product->category != null)
+                {{ $product->category->name }}
+            @endif
         </span>
 
         <h3 class="mt-4 text-lg font-medium text-gray-900">{{ $product->name }}</h3>
 
-        <p class="mt-1.5 text-sm text-gray-700">{{ $product->price }}€</p>
+        <p class="text-yellow-600 text-base">{{ $product->price }}€</p>
 
         <p class="mt-1.5 text-sm text-gray-700">
             {{ $product->detail }}

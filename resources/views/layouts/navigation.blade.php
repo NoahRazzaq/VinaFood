@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}">
-                        <img src="/img/logo-vinafood.png" alt="" class="w-1/4 h-auto ">
+                        <img src="/img/logo-vinafood.png" alt="" class="w-1/3 h-auto ">
                     </a>
                 </div>
             
@@ -25,7 +25,7 @@
                         {{ __('Restaurants') }}
                     </x-nav-link>
                     <x-nav-link :href="route('category.index')" :active="request()->routeIs('categories.index')">
-                        {{ __('Categories') }}
+                        {{ __('Catégories') }}
                     </x-nav-link>
                     <x-nav-link :href="route('favorite.index')" :active="request()->routeIs('favorite.index')">
                         {{ __('Favoris') }}

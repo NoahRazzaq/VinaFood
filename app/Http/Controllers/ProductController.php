@@ -91,16 +91,15 @@ class ProductController extends Controller
         return redirect("/products");
     }
 
-    public function edit($idProduct)
+    public function edit(Product $product)
     {
-        $product = Product::findOrFail($idProduct);
         $restaurants = Restaurant::all();
         $categories = Category::all();
 
         return view("product/edit", [
-            'product' => $product,
             'restaurants' => $restaurants,
-            'categories' => $categories
+            'categories' => $categories,
+            'product' => $product
         ]);
     }
 

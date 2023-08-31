@@ -17,9 +17,7 @@ class FavoriteController extends Controller
     {
         // user connected
         $user = Auth::user();
-
         $favoriteProducts = $user->favorites;
-
 
         return view(
             'favorite/index',
